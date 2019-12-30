@@ -118,7 +118,14 @@ resource "aws_security_group_rule" "http_inbound_access" {
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
 }
-
+resource "aws_security_group_rule" "specific_port_inbound" {
+  from_port         = 8080
+  protocol          = "tcp"
+  security_group_id = aws_security_group.test_sg.id
+  to_port           = 8080
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
 # All OutBound Access
 resource "aws_security_group_rule" "all_outbound_access" {
   from_port         = 0
